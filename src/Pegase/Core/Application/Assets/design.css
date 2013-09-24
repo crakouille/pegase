@@ -1,0 +1,9 @@
+body {
+  background-color: rgb(190, 210, 240);
+}
+
+#container {
+  background-color: rgb(200, 230, 220);
+  width: 80%;
+  margin: 0 auto 0 auto;
+} 

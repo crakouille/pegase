@@ -1,0 +1,39 @@
+###################
+# SHELL COMMANDS  #
+###################
+
+shell: :
+  import: 
+    module: Pegase/Core/Shell
+    file: Config/shell.yml
+
+
+#####################
+# SERVICES COMMANDS #
+#####################
+
+services:list :
+  class: Pegase\Core\Service\Command\ServiceCommands
+  method: service_list
+
+###################
+# ASSETS COMMANDS #
+###################
+
+assets:list :
+  class: Pegase\Core\Asset\Command\AssetCommands
+  method: asset_list_command
+
+assets:install :
+  class: Pegase\Core\Asset\Command\AssetCommands
+  method: asset_install_command
+
+###########################
+# DOCTRINE (ORM) COMMANDS #
+###########################
+
+doctrine: :
+  import: 
+    module: Pegase/External/ORM/Doctrine2
+    file: Config/shell.yml
+

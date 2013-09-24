@@ -1,0 +1,17 @@
+# Shell
+# Each command is prefixed by "shell:" (see app/config/shell.yml)
+
+commands:list :
+  class: Pegase\Core\Shell\Command\ShellCommands
+  method: command_list
+
+commands:help :
+  class: Pegase\Core\Shell\Command\ShellCommands
+  method: help
+
+commands:search :
+  class: Pegase\Core\Shell\Command\ShellCommands
+  method: search
+  parameters: search_parameters
+  options: search_options
+

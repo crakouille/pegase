@@ -1,0 +1,51 @@
+# services.yml:
+# Définition des services de base de Pegase
+
+# Il existe plusieurs services déjà chargés avant  
+# ceux de ce fichier:
+#
+# pegase.component.yaml.spyc:
+#   class: Pegase\External\YAML\Spyc\Service\SpycService
+#   parameters: ~
+# 
+
+# Request
+
+pegase.core.request:
+  class: Pegase\Core\Request\Service\Request
+  parameters: ~
+
+# Path
+# In the code
+# pegase.core.path:
+#  class: Pegase\Core\Path\Service\Path
+#  parameters: ~
+
+# Event Manager
+
+pegase.core.event_manager:
+  class: Pegase\Core\Event\Service\EventManager
+  parameters: ~
+
+pegase.core.event_loader:
+  class: Pegase\Core\Event\Service\EventListenerLoader
+  parameters: ~
+
+# Router
+
+pegase.core.router:
+  class: Pegase\Core\Router\Services\Router
+  parameters: ~
+
+# Asset
+
+pegase.core.asset:
+  class: Pegase\Core\Asset\Service\AssetService
+  parameters: ~
+
+# Template Engine
+
+pegase.component.template.twig:
+  class: Pegase\External\Template\Twig\Services\TwigService
+  parameters: ~
+

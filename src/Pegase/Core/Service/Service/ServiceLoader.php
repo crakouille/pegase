@@ -30,8 +30,6 @@ class ServiceLoader implements ServiceInterface {
           $this->load_from_yml($s['import']['file'], $s['import']['module']);
         }
         else if(key_exists('class', $s) && key_exists('parameters', $s)) {
-         
-          //echo "Ajout de ", $s_name, "<br />";
   
           $this->sm->set_service_known($s_name, array(
             $s['class'], 

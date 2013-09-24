@@ -11,7 +11,10 @@ class PegaseModule extends AbstractModule {
   }
 
   public function get_path() {
-    return "vendor/nativgames/Pegase/";
+    // ne fonctionnera que si le module est bien installé dans le vendor/ du projet, 
+    // et n'est pas censé fonctionner s'il est dans le /vendor d'autres projets
+    //  
+    return "vendor/nativgames/pegase/src/Pegase";
   }
 
   public function get_submodules() {

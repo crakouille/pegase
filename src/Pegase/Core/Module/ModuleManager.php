@@ -33,7 +33,7 @@ class ModuleManager implements ServiceInterface {
     return $this->modules;
   }
 
-  // 
+  //
 
   public function get_file($module_name, $filename) { // avec gestion de l'héritage
     
@@ -49,8 +49,9 @@ class ModuleManager implements ServiceInterface {
       if($p != NULL) {
         return $this->get_file($p, $filename);
       }
-      else
+      else {
         return NULL;
+      }
     }
 
     return $p;

@@ -1,6 +1,6 @@
 Pegase
 ======
-
+ 
 Pegase est un projet de framework PHP, conçu pour:
 - être simple d'utilisation
 - faciliter le développement

@@ -104,7 +104,7 @@ class Application extends AbstractApplication {
         
         $response->write(
           $twig->render(
-            $mm->get_file('Pegase/Core/Application', 'Views/exception.twig.html'), 
+            $mm->get_file('Pegase/Core', 'Application/Views/exception.twig.html'), 
 //            'src/Pegase/Core/Application/Views/exception.twig.html',
             array(
               'content' => $content

@@ -1,6 +1,8 @@
 <?php
 
 namespace Pegase\Core\Module;
+
+use Pegase\Core\Exception\Objects\PegaseException;
 use Pegase\Core\Service\Service\ServiceInterface;
 
 class ModuleManager implements ServiceInterface {
@@ -37,6 +39,9 @@ class ModuleManager implements ServiceInterface {
 
   public function get_file($module_name, $filename) { // avec gestion de l'héritage
     
+    if(!key_exists($module_name, $this->modules))
+      throw new PegaseException($module_name . " is not a know module.");
+
     $module = $this->modules[$module_name];
 
     $path = $this->sm->get('pegase.core.path');

@@ -16,7 +16,8 @@ class Application extends AbstractApplication {
     // Construction of the AbstractApplication
 
     parent::__construct($params, $modules, $base_dir);
-
+    
+    $mm = $this->sm->get('pegase.core.module_manager');
     // Services are now loaded
     
     try {
@@ -70,7 +71,7 @@ class Application extends AbstractApplication {
 
         $response->write(
           $twig->render(
-            'src/Pegase/Core/Application/Views/exception.twig.html',
+            $mm->get_file('Pegase/Core', 'Application/Views/exception.twig.html'),
             array(
               'content' => $content
             )
@@ -82,12 +83,13 @@ class Application extends AbstractApplication {
     }
     // sinon ...
     catch (\Exception $e) {
+
       $content = "<p>Caught " . get_class($e) . " ('" . 
              str_replace("\n", '<br />', $e->getMessage()) . 
              "'):<br />" .
              str_replace("\n", '<br />', $e) .
              "</p>";
-
+      
       $event = new ExceptionEvent("application.exception", $content);
       $response = $this->sm->get('pegase.core.event_manager')->send($event);
 
@@ -99,10 +101,11 @@ class Application extends AbstractApplication {
    
         // creating a response
         $response = new Response();
-
+        
         $response->write(
           $twig->render(
-            'src/Pegase/Core/Application/Views/exception.twig.html',
+            $mm->get_file('Pegase/Core/Application', 'Views/exception.twig.html'), 
+//            'src/Pegase/Core/Application/Views/exception.twig.html',
             array(
               'content' => $content
             )

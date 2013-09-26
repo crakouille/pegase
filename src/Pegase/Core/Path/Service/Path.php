@@ -27,6 +27,7 @@ class Path implements ServiceInterface {
   // relatif, pour les liens dans le html
   public function get_html_path($resource_path) { //pointe vers /web/$path
 
+    // étape 1: mettre un chemin relatif, donc rajouter tous les "../" nécessaires 
     $uri = $this->sm->get('pegase.core.request')->get_uri();
     $uri = explode('?', $uri);
     
@@ -58,7 +59,7 @@ class Path implements ServiceInterface {
 
   public function get_path($path) {
     if($path[0] == '/')
-      return $this->root . $path;
+      return $path;
     else
       return $this->root . '/' . $path;
   }

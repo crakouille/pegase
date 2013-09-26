@@ -42,7 +42,7 @@ abstract class AbstractApplication {
 
     // On charge tous les event listeners
     $event_listener_loader = $this->sm->get('pegase.core.event_loader');
-    $event_listener_loader->load_from_yml('/app/config/event_listeners.yml');
+    $event_listener_loader->load_from_yml('app/config/event_listeners.yml');
     
     $event_manager = $this->sm->get('pegase.core.event_manager');
     // L'application est enfin chargée

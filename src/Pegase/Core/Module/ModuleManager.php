@@ -47,6 +47,8 @@ class ModuleManager implements ServiceInterface {
     $path = $this->sm->get('pegase.core.path');
     $p = $module->get_real_path() . $filename;
     
+    echo $path->get_path($p), "<br />";
+
     if(!file_exists($path->get_path($p))) {
       // si fichier non existant
       $p = $module->get_parent();

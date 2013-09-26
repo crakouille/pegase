@@ -20,7 +20,7 @@ class Router implements ServiceInterface {
     // chargement de 2 services
     $yaml = $this->sm->get('pegase.component.yaml.spyc');
     
-    $data = $yaml->parse('/app/config/routing.yml');
+    $data = $yaml->parse('app/config/routing.yml');
     
     //echo "<pre>";
     //var_dump($data);

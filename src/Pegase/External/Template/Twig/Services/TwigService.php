@@ -29,7 +29,13 @@ class TwigService implements ServiceInterface {
     
     $root = $sm->get('pegase.core.path')->get_root();
 
-    $this->loader = new \Twig_Loader_Filesystem($root);//__DIR__ . '/../../../../../../');
+    $this->loader = new \Twig_Loader_Filesystem(
+      array(
+        $root,
+        "/"
+      )
+    );
+
     $this->twig = new \Twig_Environment(
       $this->loader,
       array('debug' => true, 'strict_variables' => true)

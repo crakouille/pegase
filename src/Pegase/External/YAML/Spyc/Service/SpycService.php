@@ -2,6 +2,8 @@
 
 namespace Pegase\External\YAML\Spyc\Service;
 
+use Pegase\Core\Exception\Objects\PegaseException;
+
 class SpycService {
 
   private $sm;
@@ -14,8 +16,13 @@ class SpycService {
 
   public function parse($file) {
     $path = $this->sm->get('pegase.core.path');
+    
+    $p = $path->get_path($file);
 
-    return \Spyc::YAMLLoad($path->get_path($file));//__DIR__ . '/../../../../../../' . $file);
+    if(!file_exists($p))
+      throw new PegaseException("File " . $p . " doesn't exists.");
+
+    return \Spyc::YAMLLoad($path->get_path($file));
   }
 
   public function dump($array) {

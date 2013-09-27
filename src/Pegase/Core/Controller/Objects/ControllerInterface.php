@@ -1,6 +1,6 @@
 <?php
 
-namespace Pegase\Core\Controller;
+namespace Pegase\Core\Controller\Objects;
 
 interface ControllerInterface {
  

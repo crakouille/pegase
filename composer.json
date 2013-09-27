@@ -1,7 +1,6 @@
 {
     "name": "nativgames/pegase",
     "type": "library",
-    "version": "1.0",
     "description" : "The Pegase PHP mini-framework",
     "require": {
         "php": ">=5.3.0",

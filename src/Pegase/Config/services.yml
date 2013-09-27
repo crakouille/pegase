@@ -43,6 +43,10 @@ pegase.core.asset:
   class: Pegase\Core\Asset\Service\AssetService
   parameters: ~
 
+pegase.core.asset_loader:
+  class: Pegase\Core\Asset\Service\AssetLoader
+  parameters: ~
+
 # Template Engine
 
 pegase.component.template.twig:

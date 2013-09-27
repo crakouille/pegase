@@ -3,6 +3,8 @@
 namespace Pegase\Core\Service\Service;
 use Pegase\Core\Service\Service\ServiceInterface;
 
+use Pegase\Core\Exception\Objects\PegaseException;
+
 class ServiceLoader implements ServiceInterface {
   
   private $sm;
@@ -37,7 +39,9 @@ class ServiceLoader implements ServiceInterface {
           ));
         }
       }
-      else var_dump($s);
+      else 
+        throw new PegaseException($s . "should be an Array."); 
+      //var_dump($s);
     }
     // end foreach
   }

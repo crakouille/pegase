@@ -1,0 +1,4 @@
+list :
+  class: Pegase\Core\Module\Command\ListCommand
+  method: modules_list
+

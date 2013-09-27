@@ -7,6 +7,15 @@ shell: :
     module: Pegase/Core/Shell
     file: Config/shell.yml
 
+#####################
+# MODULES COMMANDS  #
+#####################
+
+module: :
+  import: 
+    module: Pegase/Core/Module
+    file: Config/shell.yml
+
 
 #####################
 # SERVICES COMMANDS #

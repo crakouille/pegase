@@ -15,7 +15,8 @@ class ShellModule extends AbstractModule {
   }
 
   public function get_path() {
-    return "vendor/nativgames/Pegase/Core/Shell";
+    //return "vendor/nativgames/Pegase/Core/Shell";
+    return __DIR__;
   }
 }
 

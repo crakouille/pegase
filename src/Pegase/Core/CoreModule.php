@@ -12,13 +12,18 @@ class CoreModule extends AbstractModule {
 
   public function get_submodules() {
     return array(
+      'Module',
+      'Exception',
+      'Application',
       'Service',
-      'Request',
       'Path', // nécessite Request
       'Router', // nécessite Path et Request
-      'Exception',
+      'Request',
       'Response',
-      'Event'
+      'Event',
+      'Http',
+      'Asset',
+      'Controller'
     );
   }
 }

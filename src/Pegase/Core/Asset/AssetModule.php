@@ -1,6 +1,6 @@
 <?php
 
-namespace Pegase\Core\Event;
+namespace Pegase\Core\Asset;
 
 use \Pegase\Core\Module\AbstractModule;
 

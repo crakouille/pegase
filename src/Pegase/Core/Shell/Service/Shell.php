@@ -39,7 +39,7 @@ class Shell implements ServiceInterface {
     $this->commands = array();
    
     //$this->load_commands_configs();
-    $this->load_command_config_file('/app/config/shell.yml', '');
+    $this->load_command_config_file('app/config/shell.yml', '');
   }
 
   /* 

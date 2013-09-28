@@ -7,13 +7,11 @@ class FormView {
   private $type;
   private $inputs;
   private $input_table;
-  public $t;
 
   public function __construct($target, $type, $inputs) {
     $this->target = $target;
     $this->type = $type;
     $this->inputs = $inputs;
-    $t = "...";
   }
 
   public function start() {
@@ -37,7 +35,7 @@ class FormView {
     foreach($this->inputs as $i => $input) {
       if($input['var'] == $var_name) {
 
-        if($input['type_datas'][1] == 0) {
+        if($input['type_datas'][0] == 0) {
           $ret .= "<" . $input['type_datas'][1];
           
           if(count($input['type_datas']) > 2) {
@@ -57,13 +55,13 @@ class FormView {
     return $ret;
   }
 
-  public function input_begin() {
+  public function input_begin($var_name) {
     $ret = '';
 
     foreach($this->inputs as $i => $input) {
       if($input['var'] == $var_name) {
 
-        if($input['type_datas'][1] == 1) {
+        if($input['type_datas'][0] == 1) {
           $ret .= "<" . $input['type_datas'][1];
           
           if(count($input['type_datas']) > 2) {
@@ -83,13 +81,13 @@ class FormView {
     return $ret;
   }
 
-  public function input_end() {
+  public function input_end($var_name) {
     $ret = '';
 
     foreach($this->inputs as $i => $input) {
       if($input['var'] == $var_name) {
 
-        if($input['type_datas'][1] == 1) {
+        if($input['type_datas'][0] == 1) {
           $ret .= "</" . $input['type_datas'][1];
 
           $ret .= ">";

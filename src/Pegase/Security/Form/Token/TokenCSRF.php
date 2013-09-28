@@ -1,19 +1,18 @@
 <?php
 
-namespace Pegase\Security\Form\Objects;
+namespace Pegase\Security\Form\Token;
 
 use Pegase\Security\Form\Objects\FormView;
 
-class Form {
+class TokenCSRF {
   
   private $target;
-  private $type;
-  private $inputs;
-  private $input_table;
+  private $id;
+  //private $remote_addr; // les adresses autorisées, chaine ou liste
 
   public function __construct($target, $type = 'post') {
     $this->target = $target;
-    $this->type = $type;
+    $this->id = $type;
     $this->inputs = array();
 
     /* 
@@ -36,16 +35,12 @@ class Form {
 
   public function add($var_name, $type = 'string', $options = array()) {
 
-    /*
-      $options: array(
-        'placeholder' => 'test'
-      ); by example;
-    */
-
     $this->inputs[] = array(
       'var'     => $var_name, 
       'type'    => $type, 
       'options' => $options);
+
+    return $this;
   }
 
   public function generate() {

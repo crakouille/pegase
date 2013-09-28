@@ -36,16 +36,12 @@ class Form {
 
   public function add($var_name, $type = 'string', $options = array()) {
 
-    /*
-      $options: array(
-        'placeholder' => 'test'
-      ); by example;
-    */
-
     $this->inputs[] = array(
       'var'     => $var_name, 
       'type'    => $type, 
       'options' => $options);
+
+    return $this;
   }
 
   public function generate() {
@@ -64,10 +60,18 @@ class Form {
     */
 
     foreach($this->inputs as $input) {
+
+      if(count($this->input_table[$input['type']]) < 3) {
+        $opts = $input['options'];
+      }
+      else {
+        $opts = array_merge($input['options'], $this->input_table[$input['type']][2]);
+      }
+
       $inputs[] = array(
         'var' => $input['var'], // the name
         'type_datas' => $this->input_table[$input['type']],
-        'options' => $input['options']
+        'options' => $opts
       );
     }
 

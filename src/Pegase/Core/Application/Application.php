@@ -3,7 +3,7 @@
 namespace Pegase\Core\Application;
 
 use Pegase\Core\Application\AbstractApplication;
-use Pegase\Core\Response\Object\Response;
+use Pegase\Core\Http\Response\Response;
 
 use Pegase\Core\Exception\Objects\PegaseException;
 use Pegase\Core\Application\Event\ExceptionEvent;

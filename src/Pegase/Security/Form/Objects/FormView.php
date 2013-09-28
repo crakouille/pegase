@@ -14,9 +14,9 @@ class FormView {
     $this->inputs = $inputs;
   }
 
-  public function start() {
+  public function begin() {
 
-    return "<form method=\"" . $this->type . "\" target=\"" . $this->target . "\">";
+    return "<form action=\"" . $this->target . "\" method=\"" . $this->type . "\">";
   }
 
   public function end() {
@@ -29,17 +29,23 @@ class FormView {
         'options' => $input['options']
   */
 
-  public function input($var_name) { // closed tag
+  public function input($var_name, $options = array()) { // closed tag
     $ret = '';
 
     foreach($this->inputs as $i => $input) {
       if($input['var'] == $var_name) {
 
+        $opts = $input['options'];
+    
+        foreach($options as $name => $opt) {
+          $opts[$name] = $opt;
+        }
+
         if($input['type_datas'][0] == 0) {
           $ret .= "<" . $input['type_datas'][1];
           
-          if(count($input['type_datas']) > 2) {
-            foreach($input['type_datas'][2] as $name => $content) {
+          if(count($opts) > 0) {
+            foreach($opts as $name => $content) {
               $ret .= " ${name}=\"${content}\"";
             }
           }
@@ -55,17 +61,23 @@ class FormView {
     return $ret;
   }
 
-  public function input_begin($var_name) {
+  public function input_begin($var_name, $options = array()) {
     $ret = '';
 
     foreach($this->inputs as $i => $input) {
       if($input['var'] == $var_name) {
 
+        $opts = $input['options'];
+    
+        foreach($options as $name => $opt) {
+          $opts[$name] = $opt;
+        }
+
         if($input['type_datas'][0] == 1) {
           $ret .= "<" . $input['type_datas'][1];
           
-          if(count($input['type_datas']) > 2) {
-            foreach($input['type_datas'][2] as $name => $content) {
+          if(count($opts) > 0) {
+            foreach($opts as $name => $content) {
               $ret .= " ${name}=\"${content}\"";
             }
           }

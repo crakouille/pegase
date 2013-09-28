@@ -18,8 +18,6 @@ class CoreModule extends AbstractModule {
       'Service',
       'Path', // nécessite Request
       'Router', // nécessite Path et Request
-      'Request',
-      'Response',
       'Event',
       'Http',
       'Asset',

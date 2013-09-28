@@ -1,6 +1,6 @@
 <?php
 
-namespace Pegase\Core\Request\Service;
+namespace Pegase\Core\Http\Request\Service;
 use Pegase\Core\Service\Service\ServiceInterface;
 
 class Request implements ServiceInterface {
@@ -17,16 +17,6 @@ class Request implements ServiceInterface {
 
     if((null != $pos) && ($pos == 0))
       $this->uri = substr($this->uri, strlen('/index.php') - 1);
-
-    /*if(count($_POST) > 0)
-      $this->method = 'POST';
-    else if(isset($_GET))
-      $this->method = 'GET';
-    else {
-      //echo "This framework doesn't support this request type.";
-      //exit; // throw error
-      $this->method = null;
-    }*/
   }
 
   public function get_uri() {

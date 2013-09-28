@@ -12,7 +12,7 @@
 # Request
 
 pegase.core.request:
-  class: Pegase\Core\Request\Service\Request
+  class: Pegase\Core\Http\Request\Service\Request
   parameters: ~
 
 # Path

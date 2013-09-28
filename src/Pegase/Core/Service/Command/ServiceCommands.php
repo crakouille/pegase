@@ -11,21 +11,51 @@ class ServiceCommands extends AbstractShellCommand {
     $this->output->write_line(
       $this->formater->set_color(
         'Services list:',
-        'blue'
+        'green'
       )
     );
 
-    $this->output->set_offset(2);
-    $services_names = $this->sm->get_services_names();
-
     $lines = array();
 
+    // services instanciés
+    $lines[] = $this->formater->set_color(
+      "Services instancied:", 'blue'
+    );
+      
+    $this->output->set_offset(2);
+    $this->output->write_lines($lines);
+    $lines = array();
+
+    $services_names = $this->sm->get_services_names();
+
     foreach($services_names as $name) {
-      $lines [] = $this->formater->set_color(
+      $lines[] = $this->formater->set_color(
         $name, 'magenta'
       );
     }
 
+    $this->output->set_offset(4);
+    $this->output->write_lines($lines);
+    $lines = array();
+
+    // services connus
+    $lines[] = $this->formater->set_color(
+      "Services known and not instancied:", 'blue'
+    );
+
+    $this->output->set_offset(2);
+    $this->output->write_lines($lines);
+    $lines = array();
+
+    $services_names = $this->sm->get_services_known_names();
+
+    foreach($services_names as $name) {
+      $lines[] = $this->formater->set_color(
+        $name, 'magenta'
+      );
+    }
+
+    $this->output->set_offset(4);
     $this->output->write_lines($lines);
   }
 }

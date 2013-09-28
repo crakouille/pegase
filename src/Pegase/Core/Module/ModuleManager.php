@@ -40,7 +40,7 @@ class ModuleManager implements ServiceInterface {
   public function get_file($module_name, $filename) { // avec gestion de l'héritage
     
     if(!key_exists($module_name, $this->modules))
-      throw new PegaseException($module_name . " is not a know module.");
+      throw new PegaseException($module_name . " is not a know module: You should register it in app/Modules.php or declare it as submodule of another of your modules.");
 
     $module = $this->modules[$module_name];
 

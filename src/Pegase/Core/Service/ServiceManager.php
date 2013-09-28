@@ -30,6 +30,10 @@ class ServiceManager {
     return array_keys($this->services);
   }
 
+  public function get_services_known_names() {
+    return array_keys($this->services_known);
+  }
+
   public function set_service_known($name, $service_infos) {
     $this->services_known[$name] = $service_infos;
   }

@@ -68,14 +68,14 @@ class RouteLoader {
             $this->load_from_yml(
               $s['import'],
               null, 
-              (key_exists('prefix', $s) ? $s['prefix'] : "")
+              $prefix . (key_exists('prefix', $s) ? $s['prefix'] : "")
             );
           }
           else {
             $this->load_from_yml(
               $s['import']['file'],
               (key_exists('module', $s) ? $s['import']['module'] : null), 
-              (key_exists('prefix', $s) ? $s['prefix'] : "")
+              $prefix . (key_exists('prefix', $s) ? $s['prefix'] : "")
             );
           }
           

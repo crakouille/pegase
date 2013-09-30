@@ -4,7 +4,7 @@ namespace Pegase\Core\Application;
 
 use Pegase\Core\Response\Object\Response;
 use Pegase\Core\Exception\Objects\NGException;
-use Pegase\Core\Module\ModuleManager;
+use Pegase\Core\Module\Service\ModuleManager;
 use Pegase\Core\Service\ServiceManager;
 
 use Pegase\External\YAML\Spyc\Service\SpycService;

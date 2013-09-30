@@ -1,6 +1,6 @@
 <?php
 
-namespace Pegase\Core\Module;
+namespace Pegase\Core\Module\Service;
 
 use Pegase\Core\Exception\Objects\PegaseException;
 use Pegase\Core\Service\Service\ServiceInterface;

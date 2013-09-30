@@ -34,7 +34,7 @@ pegase.core.event_manager:
 # Router
 
 pegase.core.router:
-  class: Pegase\Core\Router\Services\Router
+  class: Pegase\Core\Router\Service\Router
   parameters: ~
 
 # Asset

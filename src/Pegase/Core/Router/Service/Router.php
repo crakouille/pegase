@@ -1,14 +1,16 @@
 <?php
 
-namespace Pegase\Core\Router\Services;
+namespace Pegase\Core\Router\Service;
 use Pegase\Core\Service\Service\ServiceInterface;
 
+use Pegase\Core\Router\Loader\RouteLoader;
 use Pegase\Core\Exception\Objects\PegaseException;
 
 class Router implements ServiceInterface {
   
   private $routes;
   private $sm;
+  private $loader;
 
   public function __construct($sm, $params = array()) {
     /*$this->routes = array(
@@ -17,57 +19,18 @@ class Router implements ServiceInterface {
     $this->routes = array();
     $this->sm = $sm;
 
-    // chargement de 2 services
-    $yaml = $this->sm->get('pegase.component.yaml.spyc');
-    
-    $data = $yaml->parse('app/config/routing.yml');
-    
-    //echo "<pre>";
-    //var_dump($data);
-    //echo "</pre>";
-
-    foreach($data as $route_name => $route) {
-
-      if(key_exists('pattern', $route) && 
-         key_exists('controller', $route) && 
-         key_exists('method', $route))
-      {
-        $this->routes[$route_name] = array($route['pattern'], $route['controller'], $route['method']);
-      }
-      else if(isset($route['import']) && isset($route['prefix'])) {
-        $subdata = $yaml->parse($route['import']);
-        
-        $n = strlen($route['prefix']) - 1;
-        if($n >= 0) {
-          if($route['prefix'][$n] == '/')
-            $route['prefix'] = substr($route['prefix'], 0, $n);
-          else;
-        }
-        else {
-          $route['prefix'] = "";
-        }
-
-        foreach($subdata as $sub_route_name => $sub_route) {
-          if(isset($sub_route['pattern']) && 
-             isset($sub_route['controller']) && 
-             isset($sub_route['method']))
-          {
-            $this->routes[$sub_route_name] = array(
-              $route['prefix'] . $sub_route['pattern'], 
-              $sub_route['controller'], 
-              $sub_route['method']
-            );
-
-            //echo $this->routes[$sub_route_name][0] . '<br />';
-            //echo $route['prefix'] . $sub_route['pattern'] . '<br />';
-          }
-          else {
-            echo "Router: Fichier de sous-routes inexistant";
-          }
-        }
-      }
-    }
+    $this->loader = new RouteLoader($sm);
+    $this->loader->set_service($this);
+    $this->loader->load_from_yml('app/config/routing.yml');
   }
+
+  public function set($route_name, $pattern, $controller, $method) {
+    $this->routes[$route_name] = array(
+      $pattern, 
+      $controller, 
+      $method
+    );
+  } 
 
   public function instancy_controller($name) {
     $controller = NULL;

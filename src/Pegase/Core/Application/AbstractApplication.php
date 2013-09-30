@@ -31,7 +31,7 @@ abstract class AbstractApplication {
     $sm->set('pegase.core.service_loader', new ServiceLoader($sm));
     
     // We load each submodule in order to get the structure of the projet,
-    // and to load commands for instant. 
+    // and to load commands for instant.
     $module_manager->load_submodules($sm);
 
     // Chargement de la configuration des services
@@ -40,10 +40,7 @@ abstract class AbstractApplication {
     $service_loader = $this->sm->get('pegase.core.service_loader');
     $service_loader->load_from_yml('app/config/services.yml');
 
-    // On charge tous les event listeners
-    $event_listener_loader = $this->sm->get('pegase.core.event_loader');
-    $event_listener_loader->load_from_yml('app/config/event_listeners.yml');
-    
+    // récupérer l'event manager charge tous les event listeners
     $event_manager = $this->sm->get('pegase.core.event_manager');
     // L'application est enfin chargée
 

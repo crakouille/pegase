@@ -1,20 +1,20 @@
 <?php
 
-namespace Pegase\Core\Asset\Service;
+namespace Pegase\Core\Asset\Loader;
 use Pegase\Core\Service\Service\ServiceInterface;
 
 use Pegase\Core\Exception\Objects\PegaseException;
 
-class AssetLoader implements ServiceInterface {
+class AssetLoader {
   
   private $sm;
   private $_as;
 
-  public function __construct($sm, $params = array()) {
+  public function __construct($sm) {
     $this->sm = $sm;
   }
 
-  public function set_asset_service($as) {
+  public function set_service($as) {
     $this->_as = $as;
   }
 
@@ -23,10 +23,17 @@ class AssetLoader implements ServiceInterface {
     $module_manager = $this->sm->get('pegase.core.module_manager');
 
     if($module != null) {
+      $yml_file1 = $yml_file;
       $yml_file = $module_manager->get_file($module, $yml_file);
+
+      if($yml_file == null)
+        throw new PegaseException("File " . $yml_file1 . " doesn't exists in module " . $module );
     }
     else
       ; 
+
+    if($yml_file == null)
+      return;
 
     $assets = $yaml->parse($yml_file);
 

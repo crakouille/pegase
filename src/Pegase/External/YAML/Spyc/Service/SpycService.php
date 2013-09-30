@@ -16,11 +16,16 @@ class SpycService {
 
   public function parse($file) {
     $path = $this->sm->get('pegase.core.path');
-    
+      
     $p = $path->get_path($file);
 
-    if(!file_exists($p))
+    if($file == null)
+      throw new PegaseException("File is NULL ... it doesn't exists.");
+
+    else if(!file_exists($p))
       throw new PegaseException("File " . $p . " doesn't exists.");
+    else
+      ;
 
     return \Spyc::YAMLLoad($path->get_path($file));
   }

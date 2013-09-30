@@ -3,7 +3,7 @@
 namespace Pegase\Core\Event\Service;
 
 use Pegase\Core\Service\Service\ServiceInterface;
-use Pegase\Core\Event\Service\EventListenerLoader;
+use Pegase\Core\Event\Loader\EventListenerLoader;
 
 class EventManager implements ServiceInterface {
 
@@ -15,17 +15,10 @@ class EventManager implements ServiceInterface {
     $this->sm = $sm;
     $this->listeners = array();
 
-    //$this->loader = $sm->get('pegase.core.event_loader');
-    //Ne pas faire ceci: les 2 services dépendent l'un de l'autre,
-    //et s'intancient indéfiniment.
-    //Pour y remédier, il faut créer ce service dans l'autre, en lui 
-    // donnant $this comme argument. Puis on enregistre le service.
-    //$this->loader = new EventListenerLoader($sm, array($this));
-    //$sm->set('pegase.core.event_loader', $this->loader);
+    $this->loader = new EventListenerLoader($sm);
 
-    // Le choix adopté est différent: avoir les 2 services dans le .yml
-    // et ne pas faire de get(service) dans l'un des 2 constructeurs.
-    // mais éventuellement à chaque début de fonction.
+    $this->loader->set_service($this);
+    $this->loader->load_from_yml('app/config/event_listeners.yml');
   }
 
   // send:

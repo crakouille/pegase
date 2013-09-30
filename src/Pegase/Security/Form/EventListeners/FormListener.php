@@ -15,7 +15,6 @@ class FormListener implements EventListenerInterface {
 
   // generate a form
   public function load_tokens() {
-    
     $c = $this->sm->get('pegase.security.token_csrf_container');
 
     $c->load();

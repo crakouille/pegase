@@ -1,0 +1,12 @@
+form_listener_init:
+  class:      Pegase\Security\Form\EventListeners\FormListener
+  method:     load_tokens
+  event:      application.loaded
+  parameters: ~
+
+form_listener_end:
+  class:      Pegase\Security\Form\EventListeners\FormListener
+  method:     save_tokens
+  event:      application.end
+  parameters: ~
+

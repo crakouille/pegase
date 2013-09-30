@@ -27,9 +27,9 @@ pegase.core.event_manager:
   class: Pegase\Core\Event\Service\EventManager
   parameters: ~
 
-pegase.core.event_loader:
-  class: Pegase\Core\Event\Service\EventListenerLoader
-  parameters: ~
+#pegase.core.event_loader:
+#  class: Pegase\Core\Event\Service\EventListenerLoader
+#  parameters: ~
 
 # Router
 
@@ -41,10 +41,6 @@ pegase.core.router:
 
 pegase.core.asset:
   class: Pegase\Core\Asset\Service\AssetService
-  parameters: ~
-
-pegase.core.asset_loader:
-  class: Pegase\Core\Asset\Service\AssetLoader
   parameters: ~
 
 # Template Engine

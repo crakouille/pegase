@@ -1,11 +1,13 @@
 <?php
 
-namespace Pegase\Security\Form\Token;
+namespace Pegase\Security\Form\Service;
 
 use Pegase\Core\Service\Service\ServiceInterface;
+use Pegase\Security\Form\Token\TokenCSRF;
 
 class TokenCSRFContainer implements ServiceInterface {
   
+  private $sm;
   private $tokens;
 
   static private $caracters = array(
@@ -19,17 +21,44 @@ class TokenCSRFContainer implements ServiceInterface {
     'U','V','W','X','Y','Z'
   );
 
-  public function __construct() {
+  public function __construct($sm, $params) {
 
-    if(key_exists('pegase.core.security.form.csrf', $_SESSION))
-      $this->tokens = $_SESSION['pegase.core.security.form.csrf'];
-    else
-      $this->tokens = array();
+    $this->sm = $sm;
+    $this->tokens = array();
+  }
+
+  public function load() {
+
+    // $_SESSION['pegase.core.security.form.csrf'] = array();
+
+    if(key_exists('pegase.core.security.form.csrf', $_SESSION)) {
+
+      foreach($_SESSION['pegase.core.security.form.csrf'] as $d) {
+        $this->tokens[$d] = new TokenCSRF($d);
+      }
+
+      //$this->tokens = array();
+ 
+      foreach($this->tokens as $t) {
+        echo $t->get_id(), "<br />";
+      }
+    }
+
+    return;
+  }
+
+  public function generate()
+  {
+    $token = new TokenCSRF($this->generate_id());
+
+    $this->set($token);
+
+    return $token;
   }
 
   public function generate_id() {
 
-    $l = strlen($this->caracters);
+    $l = count(self::$caracters);
 
     do {
 
@@ -37,7 +66,7 @@ class TokenCSRFContainer implements ServiceInterface {
       
       for($i = 0; $i < 15; $i++) {
         $n = rand(0, $l - 1);
-        $id .= $caracters[$n];
+        $id .= self::$caracters[$n];
       }
       
     } while(key_exists($id, $this->tokens));
@@ -54,10 +83,14 @@ class TokenCSRFContainer implements ServiceInterface {
 
   public function get($token_id) {
 
-    if(key_exists($token->get_id(), $this->tokens)) 
-      $token = $this->tokens[$token_id]);
-    else
-      $token = null;
+    if(key_exists($token_id, $this->tokens)) { 
+      $token = $this->tokens[$token_id];
+      
+    }
+    else {
+      $token = null;//echo "<pre>";
+      //var_dump($this->tokens);echo "</pre>";
+    }
 
     return $token;
   }
@@ -73,6 +106,22 @@ class TokenCSRFContainer implements ServiceInterface {
   }
 
   public function save() {
-    $_SESSION['pegase.core.security.form.csrf'] = $this->tokens;
+    //$_SESSION['pegase.core.security.form.csrf'] = $this->tokens;
+    $_SESSION['pegase.core.security.form.csrf'] = array();
+
+    foreach($this->tokens as $d) {
+      $_SESSION['pegase.core.security.form.csrf'][] = $d->get_id();
+    }
+  }
+
+  public function is_valid($token_id) {
+
+    $token = $this->get($token_id);
+
+    if(!$token)
+      return false;
+
+    return $token->is_valid();
   }
 }
+

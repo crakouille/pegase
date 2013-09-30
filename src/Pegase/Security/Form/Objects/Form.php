@@ -12,18 +12,23 @@ use Pegase\Security\Form\Objects\FormView;
 class Form {
   
   private $target;
+  public $token;
   private $type;
   private $inputs;
   private $input_table;
   private $values;
   private $validator;
 
-  public function __construct($target, $type = 'post') {
+  private $tokenCSRFContainer;
+
+  public function __construct($target, $tokenCSRFContainer, $type = 'post') {
     $this->target = $target;
     $this->type = $type;
+    $this->token = null;
     $this->inputs = array();
     $this->values = array();
     $this->validator = null;
+    $this->tokenCSRFContainer = $tokenCSRFContainer;
     /* 
       input_table:
       'key' => array(has close tag, )
@@ -38,7 +43,8 @@ class Form {
       'radio'    => array(0, 'input', array('type' => 'radio')),
       'checkbox' => array(0, 'input', array('type' => 'checkbox')),
       'button'   => array(1, 'button'),
-      'submit'   => array(0, 'input', array('type' => 'submit'))
+      'submit'   => array(0, 'input', array('type' => 'submit')),
+      'hidden' =>   array(0, 'input', array('type' => 'hidden'))
     );
 
   }
@@ -55,6 +61,11 @@ class Form {
 
   public function generate() {
   
+    // S'il n'y a pas de token, on en crée un
+
+    if(null == $this->token) {
+      $this->token = $this->tokenCSRFContainer->generate();
+    }
     $inputs = array();
 
     /*
@@ -83,6 +94,15 @@ class Form {
       );
     }
 
+    
+    $inputs[] = array(
+      'var' => 'token', // csrf token
+      'type_datas' => $this->input_table['hidden'],
+      'options' => array_merge(
+        array('value' => $this->token->get_id()), 
+              $this->input_table['hidden'][2])
+    );
+
     return new FormView($this->target, $this->type, $inputs);
   }
 
@@ -92,31 +112,49 @@ class Form {
     return $this;
   }
 
-  public function isValid() {
+  public function is_valid() {
+
+    //echo count($this->inputs), " ", count($this->values), " ";
 
     // bon nombre d'arguments (input de type submit à ne pas compter, d'où le -1)
-    if((count($this->inputs) - 1) != count($this->values))
+    //if((count($this->inputs) - 1) != count($this->values))
+    if((count($this->inputs)) != count($this->values)) // mais token csrf à compter
       return false;
-
+    
     // vérifications sur les types à faire
 
     // vérification du token csrf
 
+    if(!$this->token)
+      return false; // pas de token
+
+    if(!$this->token->is_valid()) {
+      $this->token = $this->tokenCSRFContainer->generate();
+
+      return false;
+    }
+
     // vérification du form validator si défini
     if($this->validator != null) {
-      if(!$this->validator->isValid($this))
+      if(!$this->validator->is_valid($this))
         return false;
     }
+
+    $this->tokenCSRFContainer->remove($this->token);
+    $this->token = null;
 
     return true;
   }
 
-  public function read_session() { 
+  public function read_post() {
 
     foreach($this->inputs as $input) {
-      if(key_exists($input['var'], $_SESSION)) {
-        $this->values[$input['var']] = $_SESSION[$input['var']];
+      if(key_exists($input['var'], $_POST)) {
+        $this->values[$input['var']] = $_POST[$input['var']];
       }
+      else;
     }
+
+    $this->token = $this->tokenCSRFContainer->get($_POST['token']);
   }
 }

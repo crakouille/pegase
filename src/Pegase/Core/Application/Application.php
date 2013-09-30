@@ -112,9 +112,11 @@ class Application extends AbstractApplication {
           )
         );
       }
-
       $response->send();
     }
+
+    $event = new ApplicationEvent('application.end');
+    $this->sm->get('pegase.core.event_manager')->send($event);
   }
 
   public function get_base_dir() { 

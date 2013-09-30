@@ -53,3 +53,14 @@ pegase.component.template.twig:
   class: Pegase\External\Template\Twig\Services\TwigService
   parameters: ~
 
+# Security - form
+
+pegase.security.token_csrf_container:
+  class: Pegase\Security\Form\Service\TokenCSRFContainer
+  parameters: ~
+
+#pegase.security.form_builder:
+form_builder:
+  class: Pegase\Security\Form\Service\FormBuilder
+  parameters: ~
+

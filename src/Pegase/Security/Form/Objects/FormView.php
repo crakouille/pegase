@@ -16,7 +16,8 @@ class FormView {
 
   public function begin() {
 
-    return "<form action=\"" . $this->target . "\" method=\"" . $this->type . "\">";
+    return "<form action=\"" . $this->target . "\" method=\"" . $this->type . "\">" . 
+      $this->input('token');
   }
 
   public function end() {
@@ -36,7 +37,7 @@ class FormView {
       if($input['var'] == $var_name) {
 
         $opts = $input['options'];
-    
+
         foreach($options as $name => $opt) {
           $opts[$name] = $opt;
         }
@@ -50,7 +51,8 @@ class FormView {
             }
           }
 
-          $ret .= " />";
+          $ret .= " name=\"" . $var_name . "\" />";
+
           unset($this->inputs[$i]); // on l'enlève
         }
         else
@@ -82,7 +84,7 @@ class FormView {
             }
           }
 
-          $ret .= ">";
+          $ret .= " name=\"" . $var_name . "\">";
           break; // on ne récupère que le premier
         }
         else

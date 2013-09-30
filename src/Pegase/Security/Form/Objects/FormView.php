@@ -6,12 +6,14 @@ class FormView {
   
   private $type;
   private $inputs;
-  private $input_table;
+  private $target;
+  private $values;
 
-  public function __construct($target, $type, $inputs) {
+  public function __construct($target, $type, $inputs, $values) {
     $this->target = $target;
     $this->type = $type;
     $this->inputs = $inputs;
+    $this->values = $values; // pour les paires de balises <balise>value</balise>
   }
 
   public function begin() {
@@ -30,7 +32,26 @@ class FormView {
         'options' => $input['options']
   */
 
-  public function input($var_name, $options = array()) { // closed tag
+  public function input($var_name, $options = array())
+  {
+    $ret = "";
+
+    if($this->inputs[$var_name]['type_datas'][0] == 0) {
+      return $this->closed_input($var_name, $options);
+    }
+    else {
+      $ret = $this->input_begin($var_name, $options);
+      
+      if(key_exists($var_name, $this->values)) 
+        $ret .= $this->values[$var_name];
+
+      $ret .= $this->input_end($var_name);
+    }
+
+    return $ret;
+  }
+
+  public function closed_input($var_name, $options = array()) { // closed tag
     $ret = '';
 
     foreach($this->inputs as $i => $input) {
@@ -56,7 +77,7 @@ class FormView {
           unset($this->inputs[$i]); // on l'enlève
         }
         else
-          echo "Mauvaise fonction: votre type de champs nécessite l'usage de `input_begin` et `input_end`";
+         echo "Mauvaise fonction: votre type de champs nécessite l'usage de `input_begin` et `input_end`";
       }
     }
 

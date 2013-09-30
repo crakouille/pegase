@@ -14,8 +14,9 @@ class TokenCSRF {
 
   public function is_valid() {
 
-    if($_SERVER['SERVER_ADDR'] != $_SERVER['REMOTE_ADDR'])
-      return false;
+    // il faudra stocker le chemin de la page dans laquelle est le formulaire
+    // et regarder $_SERVER['HTTP_REFERER']
+    // solution potentiellement non viable: http_referer renseigné par le navigateur
 
     return true;
   }

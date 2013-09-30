@@ -39,9 +39,9 @@ class TokenCSRFContainer implements ServiceInterface {
 
       //$this->tokens = array();
  
-      foreach($this->tokens as $t) {
+     /* foreach($this->tokens as $t) {
         echo $t->get_id(), "<br />";
-      }
+      }*/
     }
 
     return;

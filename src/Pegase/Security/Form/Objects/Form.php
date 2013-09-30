@@ -87,7 +87,13 @@ class Form {
         $opts = array_merge($input['options'], $this->input_table[$input['type']][2]);
       }
 
-      $inputs[] = array(
+      if(key_exists($input['var'], $this->values)) {
+        $opts['value'] = $this->values[$input['var']];
+        //echo "value: ", $opts['value'], "<br />";
+      }
+      else;
+
+      $inputs[$input['var']] = array(
         'var' => $input['var'], // the name
         'type_datas' => $this->input_table[$input['type']],
         'options' => $opts
@@ -95,15 +101,16 @@ class Form {
     }
 
     
-    $inputs[] = array(
+    $inputs['token'] = array(
       'var' => 'token', // csrf token
       'type_datas' => $this->input_table['hidden'],
       'options' => array_merge(
-        array('value' => $this->token->get_id()), 
-              $this->input_table['hidden'][2])
+        $this->input_table['hidden'][2],
+        array('value' => $this->token->get_id())
+       )
     );
 
-    return new FormView($this->target, $this->type, $inputs);
+    return new FormView($this->target, $this->type, $inputs, $this->values);
   }
 
   public function set_validator($validator) {

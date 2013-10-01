@@ -1,9 +1,9 @@
 <?php
 
-namespace Pegase\Security\Form\Service;
+namespace Pegase\Extension\Form\Service;
 
 use Pegase\Core\Service\Service\ServiceInterface;
-use Pegase\Security\Form\Token\TokenCSRF;
+use Pegase\Extension\Form\Token\TokenCSRF;
 
 class TokenCSRFContainer implements ServiceInterface {
   

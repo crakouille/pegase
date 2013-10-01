@@ -1,6 +1,6 @@
 <?php
 
-namespace Pegase\Security\Form\Objects;
+namespace Pegase\Extension\Form\Objects;
 
 class FormView {
   

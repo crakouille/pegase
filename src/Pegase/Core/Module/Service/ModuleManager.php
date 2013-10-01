@@ -5,14 +5,24 @@ namespace Pegase\Core\Module\Service;
 use Pegase\Core\Exception\Objects\PegaseException;
 use Pegase\Core\Service\Service\ServiceInterface;
 
+use Pegase\Core\Module\Loader\ModuleLoader;
+
 class ModuleManager implements ServiceInterface {
 
   private $sm;
-  private $modules; 
+  private $modules;
+  private $loader;
 
-  public function __construct($sm, $modules) {
+  public function __construct($sm, $modules = array()) {
     $this->sm = $sm;
     $this->add_modules($modules);
+
+    $this->loader = new ModuleLoader($sm);
+    $this->loader->set_service($this);
+  }
+
+  public function load() {
+    $this->loader->load_from_yml('app/config/modules.yml');
   }
 
   public function load_submodules($sm) {

@@ -9,15 +9,15 @@ use Pegase\Core\Exception\Objects\NGException;
 class Shell extends AbstractApplication {
   
 
-  public function __construct($params, $modules, $argc, $argv, $base_dir) {
-    parent::__construct($params, $modules, $base_dir);
+  public function __construct($params, $argc, $argv, $base_dir) {
+    parent::__construct($params, $base_dir);
     $sm = $this->sm;
-
+    
     $shell = new \Pegase\Core\Shell\Service\Shell($sm, array(
       $argc,
       $argv
     ));
-
+    
     $sm->set('pegase.core.shell', $shell);
     //$shell->load_commands();
 

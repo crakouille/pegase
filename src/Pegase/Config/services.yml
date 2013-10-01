@@ -52,11 +52,11 @@ pegase.component.template.twig:
 # Security - form
 
 pegase.security.token_csrf_container:
-  class: Pegase\Security\Form\Service\TokenCSRFContainer
+  class: Pegase\Extension\Form\Service\TokenCSRFContainer
   parameters: ~
 
 #pegase.security.form_builder:
 form_builder:
-  class: Pegase\Security\Form\Service\FormBuilder
+  class: Pegase\Extension\Form\Service\FormBuilder
   parameters: ~
 

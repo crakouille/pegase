@@ -16,13 +16,13 @@ abstract class AbstractApplication {
   protected $params;
   protected $sm; // service manager
 
-  public function __construct($params, $modules, $base_dir) {
+  public function __construct($params, $base_dir) {
     $this->params = $params;
 
     $sm = new ServiceManager();
     $this->sm = $sm;
     
-    $module_manager = new ModuleManager($sm, $modules);
+    $module_manager = new ModuleManager($sm);
     
     // Chargement des services de base    
     $sm->set('pegase.core.path', new Path($sm, array('base_dir' => $base_dir)));
@@ -30,6 +30,8 @@ abstract class AbstractApplication {
     $sm->set('pegase.component.yaml.spyc', new SpycService($sm));
     $sm->set('pegase.core.service_loader', new ServiceLoader($sm));
     
+
+    $module_manager->load();
     // We load each submodule in order to get the structure of the projet,
     // and to load commands for instant.
     $module_manager->load_submodules($sm);

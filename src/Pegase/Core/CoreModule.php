@@ -21,7 +21,8 @@ class CoreModule extends AbstractModule {
       'Event',
       'Http',
       'Asset',
-      'Controller'
+      'Controller',
+      'Shell'
     );
   }
 }

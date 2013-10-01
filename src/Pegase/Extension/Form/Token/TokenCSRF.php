@@ -1,6 +1,6 @@
 <?php
 
-namespace Pegase\Security\Form\Token;
+namespace Pegase\Extension\Form\Token;
 
 use Pegase\Security\Form\Objects\FormView;
 

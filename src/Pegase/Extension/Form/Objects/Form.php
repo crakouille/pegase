@@ -1,13 +1,13 @@
 <?php
 
-namespace Pegase\Security\Form\Objects;
+namespace Pegase\Extension\Form\Objects;
 
 /*
   Classe non terminée.
   Classe "FormBuilder" à coder.
 */
 
-use Pegase\Security\Form\Objects\FormView;
+use Pegase\Extension\Form\Objects\FormView;
 
 class Form {
   

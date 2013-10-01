@@ -1,6 +1,6 @@
 <?php
 
-namespace Pegase\Security\Form\EventListeners;
+namespace Pegase\Extension\Form\EventListeners;
 
 use Pegase\Core\Event\Listener\EventListenerInterface;
 

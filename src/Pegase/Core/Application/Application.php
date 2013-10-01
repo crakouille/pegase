@@ -11,11 +11,11 @@ use Pegase\Core\Application\Event\ApplicationEvent;
 
 class Application extends AbstractApplication {
   
-  public function __construct($params, $modules, $base_dir) {
+  public function __construct($params, $base_dir) {
 
     // Construction of the AbstractApplication
 
-    parent::__construct($params, $modules, $base_dir);
+    parent::__construct($params, $base_dir);
     
     $mm = $this->sm->get('pegase.core.module_manager');
     // Services are now loaded

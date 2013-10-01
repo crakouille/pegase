@@ -76,7 +76,6 @@ class Shell implements ServiceInterface {
   private function load_command_config_file($file, $prefix) { 
     $yaml = $this->sm->get('pegase.component.yaml.spyc');    
     $data = $yaml->parse($file);
-
     $mm = $this->sm->get('pegase.core.module_manager');
 
     foreach($data as $command_name => $command) {

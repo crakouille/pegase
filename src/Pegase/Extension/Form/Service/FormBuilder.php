@@ -21,7 +21,7 @@ class FormBuilder implements ServiceInterface {
   // generate a form
   public function generate($target, $type = 'post') {
     
-    $form = new \Pegase\Security\Form\Objects\Form(
+    $form = new \Pegase\Extension\Form\Objects\Form(
       $target,
       $this->sm->get('pegase.security.token_csrf_container'), 
       $type);

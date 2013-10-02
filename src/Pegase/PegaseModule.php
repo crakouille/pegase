@@ -16,8 +16,7 @@ class PegaseModule extends AbstractModule {
 
   public function get_submodules() {
     return array(
-      'Core',
-      'External'
+      'Core'
     );
   }
 }

@@ -46,7 +46,7 @@ pegase.core.asset:
 # Template Engine
 
 pegase.component.template.twig:
-  class: Pegase\External\Template\Twig\Services\TwigService
+  class: Pegase\External\Twig\Services\TwigService
   parameters: ~
 
 # Security - form

@@ -5,7 +5,7 @@
 # ceux de ce fichier:
 #
 # pegase.component.yaml.spyc:
-#   class: Pegase\External\YAML\Spyc\Service\SpycService
+#   class: Pegase\External\Spyc\Service\SpycService
 #   parameters: ~
 # 
 

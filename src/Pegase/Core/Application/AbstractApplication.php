@@ -7,7 +7,7 @@ use Pegase\Core\Exception\Objects\NGException;
 use Pegase\Core\Module\Service\ModuleManager;
 use Pegase\Core\Service\ServiceManager;
 
-use Pegase\External\YAML\Spyc\Service\SpycService;
+use Pegase\External\Spyc\Service\SpycService;
 use Pegase\Core\Service\Service\ServiceLoader;
 use Pegase\Core\Path\Service\Path;
 

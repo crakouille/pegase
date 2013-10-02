@@ -12,7 +12,6 @@ class ExternalModule extends AbstractModule {
 
   public function get_submodules() {
     return array(
-      'YAML/Spyc',
       'ORM/Doctrine2'
     );
   }

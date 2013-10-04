@@ -41,8 +41,8 @@ assets:install :
 # DOCTRINE (ORM) COMMANDS #
 ###########################
 
-doctrine: :
-  import: 
-    module: Pegase/External/ORM/Doctrine2
-    file: Config/shell.yml
+#doctrine: :
+#  import: 
+#    module: Pegase/External/ORM/Doctrine2
+#    file: Config/shell.yml
 

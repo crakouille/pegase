@@ -58,7 +58,7 @@ class EventManager implements ServiceInterface {
   public function register($event_name, $method_name, $listener) {
 
     if(key_exists($event_name, $this->listeners)) {
-      array_push(array($method_name, $listener), $this->listeners[$event_name]);
+      array_push($this->listeners[$event_name], array($method_name, $listener));
     }
     else {
       $this->listeners[$event_name] = array(array($method_name, $listener));

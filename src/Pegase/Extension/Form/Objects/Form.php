@@ -164,4 +164,14 @@ class Form {
 
     $this->token = $this->tokenCSRFContainer->get($_POST['token']);
   }
+
+  public function get_value($name) {
+    return $this->values[$name];
+  }
+
+  public function set_value($name, $val) {
+    $this->values[$name] = $val;
+    
+    return $this;
+  }
 }

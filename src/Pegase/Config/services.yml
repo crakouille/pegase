@@ -49,6 +49,10 @@ pegase.component.template.twig:
   class: Pegase\External\Twig\Services\TwigService
   parameters: ~
 
+#################################################
+#                Optionnal services             #
+#################################################
+
 # Security - form
 
 pegase.security.token_csrf_container:
@@ -58,5 +62,9 @@ pegase.security.token_csrf_container:
 #pegase.security.form_builder:
 form_builder:
   class: Pegase\Extension\Form\Service\FormBuilder
+  parameters: ~
+
+flash_bag:
+  class: Pegase\Extension\FlashBag\Service\FlashBag
   parameters: ~
 

@@ -74,12 +74,20 @@ class Shell implements ServiceInterface {
   // prefix: prefix of each command in the file
 
   private function load_command_config_file($file, $prefix) { 
+  
     $yaml = $this->sm->get('pegase.component.yaml.spyc');    
     $data = $yaml->parse($file);
     $mm = $this->sm->get('pegase.core.module_manager');
 
     foreach($data as $command_name => $command) {
-    
+
+      if(key_exists('prefix', $command)) {
+        $prefix_to_add = $command['prefix'];
+      }
+      else
+        $prefix_to_add = $command_name;
+      
+
       if(key_exists('class', $command) && key_exists('method', $command)) {
 
         if(!key_exists('parameters', $command))
@@ -89,7 +97,7 @@ class Shell implements ServiceInterface {
           $command['options'] = null;
 
         $this->add_command(array(
-          'name' => $prefix . $command_name,
+          'name' => $prefix . $prefix_to_add,
           'class' => $command['class'],
           'method' => $command['method'],
           'parameters' => $command['parameters'],
@@ -99,7 +107,7 @@ class Shell implements ServiceInterface {
       else if(key_exists('import', $command)) {
         $this->load_command_config_file(
           $mm->get_file($command['import']['module'], $command['import']['file']), 
-          $prefix . $command_name);
+          $prefix . $prefix_to_add);
       }
     }
   }

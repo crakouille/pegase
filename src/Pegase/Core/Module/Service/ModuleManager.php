@@ -71,5 +71,20 @@ class ModuleManager implements ServiceInterface {
 
     return $p;
   }
+
+  public function get_path($module_name, $filename) { // sans gestion de l'héritage
+    
+    if(!key_exists($module_name, $this->modules))
+      throw new PegaseException($module_name . " is not a know module: You should register it in app/Modules.php or declare it as submodule of another of your modules.");
+
+    $module = $this->modules[$module_name];
+
+    $path = $this->sm->get('pegase.core.path');
+    $p = $module->get_real_path() . $filename;
+
+    echo $module->get_real_path(), "\n";
+
+    return $p;
+  }
 }
 
